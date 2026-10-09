@@ -528,6 +528,12 @@ html[data-lang="eng"] .lang-btn .i-flag-gb{display:none}
 <script>
 (() => {
   'use strict';
+	
+  function getQueryParam(key, urlString = window.location.href) {
+    const url = new URL(urlString);
+    return url.searchParams.get(key);
+  }
+	
   const $  = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const root = document.documentElement;
@@ -706,9 +712,9 @@ html[data-lang="eng"] .lang-btn .i-flag-gb{display:none}
  
   (async () => {
     try {
-        var rParam = root.getAttribute('r') || "PJ-Yambol-CV";
-	    var idParam = root.getAttribute('id') || '2b59b421-b724-4c1d-b99c-a4c17fc119d7';
-	    var mParam = root.getAttribute('m');
+        var rParam = getQueryParam('r') || "PJ-Yambol-CV";
+	    var idParam = getQueryParam('id') || '2b59b421-b724-4c1d-b99c-a4c17fc119d7';
+	    var mParam = getQueryParam('m');
     	var url = "https://www.karibi.somee.com/api/logging/log";
     	var qs = [];
 
