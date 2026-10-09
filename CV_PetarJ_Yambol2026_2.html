@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="bg" data-bs-theme="light" data-lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-bg="Петър Желев — Автобиография" data-en="Petar Zhelev — Curriculum Vitae">Петър Желев — Автобиография</title>
+<meta name="description"
+      data-bg="Автобиография на Петър Желев: мрежова и системна администрация, DevOps и облачни услуги, дигитални архиви."
+      data-en="Curriculum Vitae of Petar Zhelev: network and system administration, DevOps and cloud services, digital archives."
+      content="Автобиография на Петър Желев: мрежова и системна администрация, DevOps и облачни услуги, дигитални архиви.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F4F2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23FFC700'/%3E%3Ctext x='32' y='42' font-size='26' font-weight='800' text-anchor='middle' font-family='Arial,sans-serif' fill='%2314202B'%3E%D0%9F%D0%96%3C/text%3E%3C/svg%3E">
+
+<script>
+  /* Apply saved/system theme before first paint (no flash) */
+  (function () {
+    var d = document.documentElement, t;
+    try { t = localStorage.getItem('cv-theme'); } catch (e) {}
+    if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    d.setAttribute('data-bs-theme', t);
+    d.classList.add('js');
+  })();
+
+  /* Resolve requested language before first paint: ?l=eng | ?l=bg (default bg) */
+  (function () {
+    var d = document.documentElement, l = 'bg';
+    try {
+      if (new URLSearchParams(location.search).get('l') === 'eng') l = 'eng';
+    } catch (e) {}
+    d.setAttribute('data-lang', l);
+    if (l === 'eng') d.classList.add('i18n-pending');
+    /* Safety net: never leave the page invisible if the main script fails */
+    setTimeout(function () { d.classList.remove('i18n-pending'); }, 2500);
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+<style>
+/* ===== Tokens ===== */
+:root{
+  --display:"Unbounded","Arial Black","Segoe UI Black",system-ui,sans-serif;
+  --text:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --bg:#F2F4F2; --fg:#14202B; --muted:#566474; --line:#D5DBE0; --line-strong:#B4BFC8;
+  --nav-bg:rgba(242,244,242,.88);
+  --tag:#FFC700; --on-tag:#14202B;      /* cable-label yellow */
+  --link:#06717D; --fibre:#12B5C6;      /* fibre aqua */
+  --panel:#14202B; --on-panel:#EEF3F6;
+  --bs-body-font-family:var(--text); --bs-body-bg:var(--bg); --bs-body-color:var(--fg);
+  --bs-body-line-height:1.65; --bs-border-color:var(--line); --bs-secondary-color:var(--muted);
+}
+[data-bs-theme=dark]{
+  --bg:#0D1620; --fg:#E6EDF2; --muted:#9AA9B8; --line:#243342; --line-strong:#3A4D5F;
+  --nav-bg:rgba(13,22,32,.88); --link:#4FD1DF; --fibre:#2BC3D3; --panel:#172636;
+}
+
+/* ===== Base ===== */
+html{scroll-padding-top:5.5rem}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{-webkit-font-smoothing:antialiased;transition:background-color .3s,color .3s}
+h1,h2,h3{margin:0}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px;border-radius:.3rem}
+.container{--bs-gutter-x:2rem;max-width:1120px}
+@media (min-width:768px){.container{--bs-gutter-x:3rem}}
+.icon{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.skip-link{position:absolute;left:1rem;top:-4rem;z-index:2000;padding:.6rem 1rem;border-radius:.4rem;background:var(--tag);color:var(--on-tag);font-weight:700;text-decoration:none;transition:top .2s}
+.skip-link:focus{top:1rem}
+
+/* Prevent flash of Bulgarian when ?l=eng is requested */
+html.i18n-pending body{visibility:hidden}
+
+/* ===== Navbar ===== */
+.site-nav{background:var(--nav-bg);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .25s}
+.site-nav.is-stuck{border-bottom-color:var(--line)}
+.brand{display:flex;align-items:center;gap:.65rem;color:var(--fg);font-weight:700;text-decoration:none}
+.brand:hover{color:var(--fg)}
+.logo{padding:.5rem .5rem .5rem .55rem;border-radius:.3rem;background:var(--tag);color:var(--on-tag);font:800 .78rem/1 var(--display)}
+.site-nav .navbar-nav{padding:.5rem 0}
+.site-nav .nav-link{--bs-nav-link-color:var(--muted);--bs-nav-link-hover-color:var(--fg);--bs-nav-link-padding-x:.85rem;position:relative;font-weight:600}
+.site-nav .nav-link.active{color:var(--fg)}
+.site-nav .nav-link.active::after{content:"";position:absolute;left:.85rem;right:.85rem;bottom:.2rem;height:3px;border-radius:2px;background:var(--tag)}
+.icon-btn{display:inline-grid;place-items:center;width:2.4rem;height:2.4rem;padding:0;border:1px solid var(--line-strong);border-radius:.5rem;background:transparent;color:var(--fg);transition:background-color .2s}
+.icon-btn:hover{background:var(--line)}
+[data-bs-theme=dark] .i-moon,:root:not([data-bs-theme=dark]) .i-sun{display:none}
+@media (min-width:992px){.site-nav .navbar-nav{padding:0}}
+
+/* ===== Language flag button ===== */
+.flag{width:1.5rem;height:1rem;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.22)}
+.lang-btn .i-flag-bg{display:none}
+html[data-lang="eng"] .lang-btn .i-flag-bg{display:block}
+html[data-lang="eng"] .lang-btn .i-flag-gb{display:none}
+
+/* ===== Buttons ===== */
+.btn{--bs-btn-border-radius:.45rem;--bs-btn-font-weight:700}
+.btn-tag{--bs-btn-color:#14202B;--bs-btn-bg:var(--tag);--bs-btn-border-color:var(--tag);--bs-btn-hover-color:#14202B;--bs-btn-hover-bg:#FFD633;--bs-btn-hover-border-color:#FFD633;--bs-btn-active-color:#14202B;--bs-btn-active-bg:#E6B300;--bs-btn-active-border-color:#E6B300;--bs-btn-focus-shadow-rgb:255,199,0}
+
+/* ===== Hero ===== */
+.hero{padding:clamp(2.5rem,7vw,5.5rem) 0 clamp(1.5rem,4vw,3rem)}
+.nameplate{margin-bottom:1.75rem;font:800 clamp(2.6rem,9.5vw,5.4rem)/1 var(--display);letter-spacing:-.03em}
+.nameplate span{display:block;width:fit-content;padding:.1em .26em .14em;border-radius:.12em;background:var(--tag);color:var(--on-tag);animation:feed .9s cubic-bezier(.7,0,.2,1) both;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.nameplate span+span{margin:.08em 0 0 .55em;animation-delay:.3s}
+.tagline{max-width:30rem;margin:0;font-size:clamp(1.1rem,2.3vw,1.35rem)}
+.tagline,.panel{animation:rise .8s ease .85s backwards}
+@keyframes feed{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+
+/* Contact panel */
+.panel{padding:1.5rem;border:1px solid transparent;border-radius:.9rem;background:var(--panel);color:var(--on-panel)}
+[data-bs-theme=dark] .panel{border-color:var(--line)}
+.panel h2{margin-bottom:.75rem;font:700 1.15rem/1.2 var(--text)}
+.contact-row{display:flex;align-items:center;gap:.8rem;padding:.7rem 0;border-top:1px solid rgba(255,255,255,.14)}
+.contact-row .icon{color:var(--tag);font-size:1.25rem}
+.panel a:not(.btn){color:inherit;font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.panel a:not(.btn):hover{text-decoration:underline;text-underline-offset:.2em}
+.panel :focus-visible{outline-color:var(--tag)}
+.copy-btn{display:grid;place-items:center;width:2.1rem;height:2.1rem;margin-left:auto;padding:0;border:1px solid rgba(255,255,255,.25);border-radius:.5rem;background:transparent;color:inherit;transition:background-color .2s}
+.copy-btn:hover{background:rgba(255,255,255,.12)}
+.copy-btn .icon{color:inherit;font-size:1rem}
+
+/* ===== Sections ===== */
+.cv-section{padding-top:clamp(2.5rem,6vw,4.5rem)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.25rem 1.5rem;margin-bottom:1.75rem;padding-top:1rem;border-top:2px solid var(--fg)}
+.sec-head h2{font:600 clamp(1.15rem,2.6vw,1.5rem)/1.2 var(--display);letter-spacing:-.01em}
+.sec-meta{margin:0;color:var(--muted);font-size:.92rem}
+.spec{padding:1.25rem 0;border-top:1px solid var(--line)}
+.sec-head+.spec{padding-top:0;border-top:0}
+.spec h3{margin-bottom:.35rem;font:700 1.05rem/1.4 var(--text)}
+.spec p{max-width:62ch;margin:0 0 .6rem}
+.spec p:last-child{margin-bottom:0}
+.cert{display:flex;gap:.55rem;color:var(--link);font-weight:600}
+.cert .icon{margin-top:.28em}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 0;padding:0;list-style:none}
+.chip{padding:.2rem .6rem;border:1px solid var(--line-strong);border-radius:.3rem;font-size:.85rem;font-weight:500}
+.tag{display:inline-block;padding:.28rem .55rem;border-radius:.3rem;background:var(--tag);color:var(--on-tag);font-size:.8rem;font-weight:700;line-height:1.3;white-space:nowrap;font-variant-numeric:tabular-nums;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.dur{margin-left:.6rem;color:var(--muted);font-size:.85rem}
+
+/* ===== Fibre timeline ===== */
+.fibre{--lx:.7rem;--p:1;position:relative;margin:0;padding:0;list-style:none}
+.fibre::before,.fibre::after{content:"";position:absolute;z-index:0;left:calc(var(--lx) - 1px);top:.35rem;width:2px;border-radius:2px}
+.fibre::before{bottom:.35rem;background:var(--line-strong)}
+.fibre::after{height:calc((100% - .7rem) * var(--p));background:linear-gradient(var(--fibre),var(--tag));box-shadow:0 0 10px rgba(18,181,198,.55)}
+.job{position:relative;padding:0 0 2.5rem 2.25rem}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;z-index:1;left:calc(var(--lx) - 7px);top:.4rem;box-sizing:border-box;width:14px;height:14px;border:2px solid var(--tag);border-radius:50%;background:var(--tag);box-shadow:0 0 0 4px var(--bg);transition:background-color .35s,border-color .35s}
+.js .job:not(.lit)::before{border-color:var(--line-strong);background:var(--bg)}
+.job-when{margin-bottom:.6rem}
+.job-what h3{font:700 1.2rem/1.3 var(--text)}
+.org{margin:.15rem 0 .75rem;color:var(--muted);font-size:.95rem}
+.org strong{color:var(--fg);font-weight:600}
+.ticks{max-width:60ch;margin:0;padding:0;list-style:none}
+.ticks li{position:relative;margin:.3rem 0;padding-left:1.1rem}
+.ticks li::before{content:"";position:absolute;left:0;top:.62em;width:.4rem;height:.4rem;border-radius:1px;background:var(--fibre)}
+@media (min-width:768px){
+  .fibre{--lx:calc(13rem + 1.25rem)}
+  .job{display:grid;grid-template-columns:13rem 1fr;column-gap:2.5rem;padding-left:0}
+  .job-when{margin:0}
+  .dur{display:block;margin:.4rem 0 0}
+}
+
+/* ===== Languages / facts ===== */
+.langs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.9rem 2.5rem;margin:0;padding:0;list-style:none}
+.langs li{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lvl{display:inline-flex;align-items:center;gap:.6rem;font-weight:700}
+.sig{display:inline-flex;align-items:flex-end;gap:3px;width:37px;height:1.05rem}
+.sig i{width:5px;border-radius:1px;background:var(--line-strong)}
+.sig i:nth-child(1){height:30%}.sig i:nth-child(2){height:48%}.sig i:nth-child(3){height:66%}.sig i:nth-child(4){height:84%}.sig i:nth-child(5){height:100%}
+.sig i.on{background:var(--link)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:0 2.5rem;margin:0}
+.facts>div{padding:.9rem 0;border-top:1px solid var(--line)}
+.facts dt{color:var(--muted);font-size:.85rem;font-weight:500}
+.facts dd{margin:0;font-weight:600}
+
+/* ===== Footer / toast ===== */
+.site-footer{margin-top:clamp(3rem,6vw,5rem);padding:1.5rem 0 2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.toast{--bs-toast-bg:var(--panel);--bs-toast-color:var(--on-panel);--bs-toast-border-radius:.5rem;--bs-toast-font-size:.9rem}
+
+/* ===== Reduced motion & print ===== */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{
+  :root,[data-bs-theme=dark]{--bg:#fff;--fg:#000;--muted:#333;--line:#bbb;--line-strong:#888;--link:#000;--panel:#fff;--on-panel:#000}
+  .site-nav,.skip-link,.copy-btn,.btn,.toast-container{display:none!important}
+  .hero{padding:1rem 0}
+  .nameplate span,.tagline,.panel{animation:none}
+  .panel{border:1px solid #000}
+  .contact-row{border-color:#bbb}
+  .contact-row .icon{color:#000}
+  .fibre{--p:1!important}
+  .job::before{background:var(--tag)!important;border-color:var(--tag)!important}
+  .cv-section{padding-top:1.25rem}
+  .job,.spec,.facts>div{break-inside:avoid}
+}
+</style>
+<noscript><style>html.i18n-pending body{visibility:visible!important}</style></noscript>
+</head>
+
+<body id="top">
+<a class="skip-link" href="#main" data-bg="Към съдържанието" data-en="Skip to content">Към съдържанието</a>
+
+<!-- Icon sprite (inline, no external requests) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><path d="m8.21 13.89-1.21 9.11 5-3 5 3-1.21-9.12"/></symbol>
+  <!-- Flags -->
+  <symbol id="f-bg" viewBox="0 0 60 40">
+    <rect width="60" height="40" fill="#ffffff"/>
+    <rect y="13.333" width="60" height="13.334" fill="#00966E"/>
+    <rect y="26.667" width="60" height="13.333" fill="#D62612"/>
+  </symbol>
+  <symbol id="f-gb" viewBox="0 0 60 40">
+    <rect width="60" height="40" fill="#012169"/>
+    <path d="M0 0 60 40M60 0 0 40" stroke="#ffffff" stroke-width="8"/>
+    <path d="M0 0 60 40M60 0 0 40" stroke="#C8102E" stroke-width="4"/>
+    <path d="M30 0v40M0 20h60" stroke="#ffffff" stroke-width="13"/>
+    <path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="8"/>
+  </symbol>
+</svg>
+
+<!-- ===== Navigation ===== -->
+<nav class="navbar navbar-expand-lg sticky-top site-nav" aria-label="Основна навигация" data-bg-aria="Основна навигация" data-en-aria="Main navigation">
+  <div class="container">
+    <a class="brand" href="#top" aria-label="Петър Желев, към началото"
+       data-bg-aria="Петър Желев, към началото" data-en-aria="Petar Zhelev, back to top">
+      <span class="logo" data-bg="ПЖ" data-en="PZ">ПЖ</span><span class="d-none d-sm-inline" data-bg="Петър Желев" data-en="Petar Zhelev">Петър Желев</span>
+    </a>
+
+    <div class="d-flex align-items-center gap-2 order-lg-3">
+      <!-- Language toggle (flag) -->
+      <button class="icon-btn lang-btn" id="langBtn" type="button" aria-pressed="false"
+              aria-label="Превключи на английски"
+              data-bg-aria="Превключи на английски" data-en-aria="Switch to Bulgarian">
+        <svg class="flag i-flag-gb" viewBox="0 0 60 40" aria-hidden="true" focusable="false"><use href="#f-gb"/></svg>
+        <svg class="flag i-flag-bg" viewBox="0 0 60 40" aria-hidden="true" focusable="false"><use href="#f-bg"/></svg>
+      </button>
+
+      <button class="icon-btn" id="themeBtn" type="button" aria-pressed="false"
+              aria-label="Смяна на светла/тъмна тема"
+              data-bg-aria="Смяна на светла/тъмна тема" data-en-aria="Toggle light/dark theme">
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+
+      <button class="icon-btn" id="printBtn" type="button"
+              aria-label="Запази като PDF или принтирай"
+              data-bg-aria="Запази като PDF или принтирай" data-en-aria="Save as PDF or print">
+        <svg class="icon" aria-hidden="true"><use href="#i-print"/></svg>
+      </button>
+
+      <button class="icon-btn d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false"
+              aria-label="Меню" data-bg-aria="Меню" data-en-aria="Menu">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse order-lg-2" id="nav">
+      <ul class="navbar-nav ms-lg-auto me-lg-3">
+        <li class="nav-item"><a class="nav-link" href="#experience" data-bg="Опит" data-en="Experience">Опит</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills" data-bg="Умения" data-en="Skills">Умения</a></li>
+        <li class="nav-item"><a class="nav-link" href="#education" data-bg="Образование" data-en="Education">Образование</a></li>
+        <li class="nav-item"><a class="nav-link" href="#languages" data-bg="Езици" data-en="Languages">Езици</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact" data-bg="Контакт" data-en="Contact">Контакт</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" aria-labelledby="name">
+    <div class="container">
+      <div class="row g-4 g-lg-5 align-items-end">
+        <div class="col-lg-7">
+          <h1 class="nameplate" id="name"><span data-bg="Петър" data-en="Petar">Петър</span> <span data-bg="Желев" data-en="Zhelev">Желев</span></h1>
+          <p class="tagline" data-bg="Мрежова и системна администрация, DevOps и облачни услуги, дигитални архиви."
+             data-en="Network and system administration, DevOps and cloud services, digital archives.">Мрежова и системна администрация, DevOps и облачни услуги, дигитални архиви.</p>
+        </div>
+
+        <div class="col-lg-5">
+          <aside class="panel" id="contact" aria-labelledby="contact-title">
+            <h2 id="contact-title" data-bg="Контакт" data-en="Contact">Контакт</h2>
+            <ul class="list-unstyled m-0">
+              <li class="contact-row">
+                <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+                <span class="visually-hidden" data-bg="Телефон:" data-en="Phone:">Телефон:</span>
+                <a href="tel:+359885629652">0885 62 96 52</a>
+                <button class="copy-btn" type="button" data-copy="0885 62 96 52"
+                        aria-label="Копирай телефонния номер"
+                        data-bg-aria="Копирай телефонния номер" data-en-aria="Copy phone number"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg></button>
+              </li>
+              <li class="contact-row">
+                <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+                <span class="visually-hidden" data-bg="Имейл:" data-en="Email:">Имейл:</span>
+                <a href="mailto:pet.jelev@gmail.com">pet.jelev@gmail.com</a>
+                <button class="copy-btn" type="button" data-copy="pet.jelev@gmail.com"
+                        aria-label="Копирай имейл адреса"
+                        data-bg-aria="Копирай имейл адреса" data-en-aria="Copy email address"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg></button>
+              </li>
+              <li class="contact-row">
+                <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+                <span class="visually-hidden" data-bg="Местоживеене:" data-en="Location:">Местоживеене:</span>
+                <span data-bg="Ямбол, България" data-en="Yambol, Bulgaria">Ямбол, България</span>
+              </li>
+            </ul>
+            <a class="btn btn-tag w-100 mt-3" href="mailto:pet.jelev@gmail.com"
+               data-bg="Изпрати имейл" data-en="Send email">Изпрати имейл</a>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- ===== Experience ===== -->
+    <section class="cv-section" id="experience" aria-labelledby="h-experience">
+      <div class="sec-head">
+        <h2 id="h-experience" data-bg="Професионален опит" data-en="Professional experience">Професионален опит</h2>
+        <p class="sec-meta"><span data-bg="Общо:" data-en="Total:">Общо:</span> <span id="total">22 г. 3 мес.</span></p>
+      </div>
+
+      <ol class="fibre" id="fibre">
+        <li class="job">
+          <div class="job-when">
+            <span class="tag"><time datetime="2023-04-01" data-bg="01.04.2023" data-en="Apr 2023">01.04.2023</time> – <time datetime="2025-08-10" data-bg="10.08.2025" data-en="Aug 2025">10.08.2025</time></span>
+            <span class="dur" data-duration>2 г. 4 мес.</span>
+          </div>
+          <div class="job-what">
+            <h3 data-bg="Техник" data-en="Technician">Техник</h3>
+            <p class="org"><strong data-bg="БТС" data-en="BTS">БТС</strong><span data-bg=", София" data-en=", Sofia">, София</span></p>
+            <ul class="ticks">
+              <li data-bg="Изграждане и администриране на LAN оптични мрежи." data-en="Building and administering LAN fibre-optic networks.">Изграждане и администриране на LAN оптични мрежи.</li>
+              <li data-bg="Проектиране и разработка на софтуер за управление на достъпа за паркинг системи." data-en="Designing and developing access-control software for parking systems.">Проектиране и разработка на софтуер за управление на достъпа за паркинг системи.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">
+            <span class="tag"><time datetime="2020-10-01" data-bg="01.10.2020" data-en="Oct 2020">01.10.2020</time> – <time datetime="2023-02-20" data-bg="20.02.2023" data-en="Feb 2023">20.02.2023</time></span>
+            <span class="dur" data-duration>2 г. 4 мес.</span>
+          </div>
+          <div class="job-what">
+            <h3 data-bg="Управител" data-en="Manager">Управител</h3>
+            <p class="org"><strong data-bg="Петрол АД" data-en="Petrol AD">Петрол АД</strong><span data-bg=", Слънчев бряг, БНЗ" data-en=", Sunny Beach, BG">, Слънчев бряг, БНЗ</span></p>
+            <ul class="ticks">
+              <li data-bg="Управление на петролна станция" data-en="Managing a petrol station">Управление на петролна станция</li>
+              <li data-bg="Ревизия" data-en="Auditing">Ревизия</li>
+              <li data-bg="Отчети" data-en="Reporting">Отчети</li>
+              <li data-bg="Продажби" data-en="Sales">Продажби</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">
+            <span class="tag"><time datetime="2006-03-01" data-bg="01.03.2006" data-en="Mar 2006">01.03.2006</time> – <time datetime="2019-02-20" data-bg="20.02.2019" data-en="Feb 2019">20.02.2019</time></span>
+            <span class="dur" data-duration>12 г. 11 мес.</span>
+          </div>
+          <div class="job-what">
+            <h3 data-bg="Преподавател" data-en="Teacher">Преподавател</h3>
+            <p class="org"><strong data-bg="СОУ 135" data-en="Secondary School 135">СОУ 135</strong><span data-bg=", Влас" data-en=", Vlas">, Влас</span></p>
+            <ul class="ticks">
+              <li data-bg="Преподаване и завеждане на дигитални архиви" data-en="Teaching and maintaining digital archives">Преподаване и завеждане на дигитални архиви</li>
+              <li data-bg="Изготвяне на дигитални доклади за архивни единици" data-en="Preparing digital reports for archive units">Изготвяне на дигитални доклади за архивни единици</li>
+              <li data-bg="Изпитване и оценяване" data-en="Examining and grading">Изпитване и оценяване</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">
+            <span class="tag"><time datetime="2001-04-01" data-bg="01.04.2001" data-en="Apr 2001">01.04.2001</time> – <time datetime="2005-12-10" data-bg="10.12.2005" data-en="Dec 2005">10.12.2005</time></span>
+            <span class="dur" data-duration>4 г. 8 мес.</span>
+          </div>
+          <div class="job-what">
+            <h3 data-bg="Монтажник на климатична техника, дограма и груб строеж" data-en="Installer of air-conditioning, joinery and structural works">Монтажник на климатична техника, дограма и груб строеж</h3>
+            <p class="org">
+              <strong data-bg="Строй Несебър" data-en="Stroy Nessebar">Строй Несебър</strong><span data-bg=", гр. Несебър" data-en=", Nessebar">, гр. Несебър</span><br>
+              <span data-bg="Строителен сектор; студент, непълно работно време" data-en="Construction sector; student, part-time">Строителен сектор; студент, непълно работно време</span>
+            </p>
+            <ul class="ticks">
+              <li data-bg="Общ работник – покриви, бетон, дограми, климатици" data-en="General labourer – roofing, concrete, window frames, air conditioners">Общ работник – покриви, бетон, дограми, климатици</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section class="cv-section" id="skills" aria-labelledby="h-skills">
+      <div class="sec-head"><h2 id="h-skills" data-bg="Умения" data-en="Skills">Умения</h2></div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="Мрежи и системна администрация" data-en="Networks and system administration">Мрежи и системна администрация</h3></div>
+        <div class="col-md-8">
+          <p class="cert"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg><span data-bg="Сертификат: мрежова и системна администрация (Linux, Unix, Windows)" data-en="Certificate: network and system administration (Linux, Unix, Windows)">Сертификат: мрежова и системна администрация (Linux, Unix, Windows)</span></p>
+          <p data-bg="Изграждане, конфигуриране и администрация на LAN мрежи." data-en="Building, configuring and administering LAN networks.">Изграждане, конфигуриране и администрация на LAN мрежи.</p>
+          <ul class="chips">
+            <li class="chip">Linux</li><li class="chip">Unix</li><li class="chip">Windows Server</li>
+            <li class="chip">OPNsense</li><li class="chip">VMware</li><li class="chip">Docker</li><li class="chip">Terraform</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="DevOps и облачни услуги" data-en="DevOps and cloud services">DevOps и облачни услуги</h3></div>
+        <div class="col-md-8">
+          <p data-bg="Висок опит с DevOps, облачни услуги и SaaS." data-en="Extensive experience with DevOps, cloud services and SaaS.">Висок опит с DevOps, облачни услуги и SaaS.</p>
+          <ul class="chips"><li class="chip">DevOps</li><li class="chip">SaaS</li><li class="chip">Microsoft Azure</li></ul>
+        </div>
+      </div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="Бази данни" data-en="Databases">Бази данни</h3></div>
+        <div class="col-md-8">
+          <ul class="chips"><li class="chip">MSSQL</li><li class="chip">PostgreSQL</li><li class="chip">MySQL</li></ul>
+        </div>
+      </div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="Офис приложения" data-en="Office applications">Офис приложения</h3></div>
+        <div class="col-md-8">
+          <ul class="chips"><li class="chip">Word</li><li class="chip">Excel</li><li class="chip">PowerPoint</li><li class="chip">Outlook</li></ul>
+        </div>
+      </div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="Електротехника" data-en="Electrical engineering">Електротехника</h3></div>
+        <div class="col-md-8"><p data-bg="Проектиране и изграждане на електрически схеми, модули, релета и безконтактни контролери." data-en="Designing and building electrical circuits, modules, relays and contactless controllers.">Проектиране и изграждане на електрически схеми, модули, релета и безконтактни контролери.</p></div>
+      </div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="Монтаж и заваряване" data-en="Installation and welding">Монтаж и заваряване</h3></div>
+        <div class="col-md-8"><p data-bg="Опит в монтаж и поддръжка на климатични инсталации. Опит като заварчик." data-en="Experience in installation and maintenance of air-conditioning systems. Experience as a welder.">Опит в монтаж и поддръжка на климатични инсталации. Опит като заварчик.</p></div>
+      </div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="Свидетелство за управление на МПС" data-en="Driving licence">Свидетелство за управление на МПС</h3></div>
+        <div class="col-md-8"><p data-bg="Категория В" data-en="Category B">Категория В</p></div>
+      </div>
+    </section>
+
+    <!-- ===== Education ===== -->
+    <section class="cv-section" id="education" aria-labelledby="h-education">
+      <div class="sec-head"><h2 id="h-education" data-bg="Образование и квалификации" data-en="Education and qualifications">Образование и квалификации</h2></div>
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><span class="tag"><time datetime="2000">2000</time> – <time datetime="2005">2005</time></span></div>
+        <div class="col-md-8">
+          <h3 data-bg="Бакалавър, специалност Архиви" data-en="Bachelor's degree, Archival Studies">Бакалавър, специалност Архиви</h3>
+          <p data-bg="ВСУ „Черноризец Храбър“, Варна" data-en="Varna Free University “Chernorizets Hrabar”, Varna">ВСУ „Черноризец Храбър“, Варна</p>
+          <p data-bg="Учителска правоспособност: професионална квалификация „Учител“." data-en="Teaching qualification: professional qualification “Teacher”.">Учителска правоспособност: професионална квалификация „Учител“.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Languages ===== -->
+    <section class="cv-section" id="languages" aria-labelledby="h-languages">
+      <div class="sec-head"><h2 id="h-languages" data-bg="Езици" data-en="Languages">Езици</h2></div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="Български" data-en="Bulgarian">Български</h3></div>
+        <div class="col-md-8"><p data-bg="Майчин език" data-en="Native language">Майчин език</p></div>
+      </div>
+
+      <div class="spec row g-0">
+        <div class="col-md-4 pe-md-4"><h3 data-bg="Английски" data-en="English">Английски</h3></div>
+        <div class="col-md-8">
+          <ul class="langs">
+            <li><span data-bg="Разбиране" data-en="Understanding">Разбиране</span><span class="lvl"><span class="sig" data-level="4" aria-hidden="true"></span>Advanced</span></li>
+            <li><span data-bg="Четене" data-en="Reading">Четене</span><span class="lvl"><span class="sig" data-level="4" aria-hidden="true"></span>Advanced</span></li>
+            <li><span data-bg="Говорене" data-en="Speaking">Говорене</span><span class="lvl"><span class="sig" data-level="4" aria-hidden="true"></span>Advanced</span></li>
+            <li><span data-bg="Писане" data-en="Writing">Писане</span><span class="lvl"><span class="sig" data-level="4" aria-hidden="true"></span>Advanced</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Personal info ===== -->
+    <section class="cv-section" id="personal" aria-labelledby="h-personal">
+      <div class="sec-head"><h2 id="h-personal" data-bg="Лична информация" data-en="Personal information">Лична информация</h2></div>
+      <dl class="facts">
+        <div><dt data-bg="Професия" data-en="Profession">Професия</dt><dd data-bg="Архиви" data-en="Archives">Архиви</dd></div>
+        <div><dt data-bg="Пол" data-en="Gender">Пол</dt><dd data-bg="Мъж" data-en="Male">Мъж</dd></div>
+        <div><dt data-bg="Дата на раждане" data-en="Date of birth">Дата на раждане</dt><dd><time datetime="1980-11-11">11.11.1980</time></dd></div>
+        <div><dt data-bg="Националност" data-en="Nationality">Националност</dt><dd data-bg="Българска" data-en="Bulgarian">Българска</dd></div>
+        <div><dt data-bg="Майчин език" data-en="Mother tongue">Майчин език</dt><dd data-bg="Български" data-en="Bulgarian">Български</dd></div>
+        <div><dt data-bg="Местоживеене" data-en="Residence">Местоживеене</dt><dd data-bg="Ямбол" data-en="Yambol">Ямбол</dd></div>
+      </dl>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container d-flex flex-column flex-sm-row justify-content-between gap-2">
+    <span>© <span id="year">2026</span> <span data-bg="Петър Желев" data-en="Petar Zhelev">Петър Желев</span></span>
+    <a href="#top" data-bg="Към началото" data-en="Back to top">Към началото</a>
+  </div>
+</footer>
+
+<!-- Toast (copy feedback) -->
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+  <div id="toast" class="toast align-items-center border-0" role="status" aria-live="polite" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+              aria-label="Затвори" data-bg-aria="Затвори" data-en-aria="Close"></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<script>
+(() => {
+  'use strict';
+  const $  = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ============================================================
+     1 · LANGUAGE  —  ?l=eng → English · ?l=bg / no param → Bulgarian
+     ============================================================ */
+  let lang = root.getAttribute('data-lang') === 'eng' ? 'eng' : 'bg';
+
+  const L = {
+    bg:  { copied: 'Копирано в клипборда', fail: 'Копирането не бе успешно',
+           yr: 'г.', mo: 'мес.', under: 'под 1 мес.' },
+    eng: { copied: 'Copied to clipboard',  fail: 'Copy failed',
+           yr: 'yr', mo: 'mo', under: '< 1 mo' }
+  };
+  const t = () => L[lang];
+
+  const applyLang = () => {
+    const en = lang === 'eng';
+    root.setAttribute('data-lang', lang);
+    root.lang = en ? 'en' : 'bg';
+
+    /* plain text */
+    $$('[data-bg]').forEach(el => {
+      const v = en ? el.dataset.en : el.dataset.bg;
+      if (v == null) return;
+      if (el.tagName === 'META') el.setAttribute('content', v);
+      else el.textContent = v;
+    });
+    /* rich text (optional) */
+    $$('[data-bg-html]').forEach(el => {
+      const v = en ? el.dataset.enHtml : el.dataset.bgHtml;
+      if (v != null) el.innerHTML = v;
+    });
+    /* accessible labels */
+    $$('[data-bg-aria]').forEach(el => {
+      const v = en ? el.dataset.enAria : el.dataset.bgAria;
+      if (v != null) el.setAttribute('aria-label', v);
+    });
+
+    const btn = $('#langBtn');
+    if (btn) btn.setAttribute('aria-pressed', String(en));
+
+    root.classList.remove('i18n-pending');
+  };
+  applyLang();   /* runs first → un-hides the page as early as possible */
+
+  /* ============================================================
+     2 · DURATIONS + TOTAL EXPERIENCE (language aware)
+     ============================================================ */
+  const monthsBetween = (a, b) =>
+    (b.getUTCFullYear() - a.getUTCFullYear()) * 12 + b.getUTCMonth() - a.getUTCMonth() -
+    (b.getUTCDate() < a.getUTCDate() ? 1 : 0);
+
+  const fmt = m => {
+    const y = Math.floor(m / 12), mo = m % 12;
+    return [y && `${y} ${t().yr}`, mo && `${mo} ${t().mo}`].filter(Boolean).join(' ') || t().under;
+  };
+
+  const jobs = $$('.job');
+  const jobMonths = jobs.map(job => {
+    const [from, to] = $$('time', job).map(el => new Date(el.dateTime));
+    return Math.max(0, monthsBetween(from, to || new Date()));   /* no end date = still working */
+  });
+  const totalMonths = jobMonths.reduce((a, b) => a + b, 0);
+
+  const renderDurations = () => {
+    jobs.forEach((job, i) => { $('[data-duration]', job).textContent = fmt(jobMonths[i]); });
+    $('#total').textContent = fmt(totalMonths);
+  };
+  renderDurations();
+
+  /* Language toggle (flag button) */
+  $('#langBtn').addEventListener('click', () => {
+    lang = lang === 'eng' ? 'bg' : 'eng';
+    applyLang();
+    renderDurations();
+  });
+
+  /* ============================================================
+     3 · Light/dark theme (remembered in localStorage)
+     ============================================================ */
+  const themeMeta = $('meta[name="theme-color"]');
+  const setTheme = (th, save) => {
+    root.setAttribute('data-bs-theme', th);
+    themeMeta.setAttribute('content', th === 'dark' ? '#0D1620' : '#F2F4F2');
+    $('#themeBtn').setAttribute('aria-pressed', String(th === 'dark'));
+    if (save) { try { localStorage.setItem('cv-theme', th); } catch (e) {} }
+  };
+  setTheme(root.getAttribute('data-bs-theme'));
+  $('#themeBtn').addEventListener('click', () =>
+    setTheme(root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark', true));
+
+  /* ============================================================
+     4 · Fibre timeline: the line and markers light up as you scroll
+     ============================================================ */
+  const fibre = $('#fibre');
+  const light = () => {
+    const r = fibre.getBoundingClientRect(), line = innerHeight * 0.55;
+    fibre.style.setProperty('--p', Math.min(1, Math.max(0, (line - r.top) / r.height)).toFixed(3));
+    jobs.forEach(j => j.classList.toggle('lit', j.getBoundingClientRect().top < line));
+  };
+  if (reduce) { fibre.style.setProperty('--p', 1); jobs.forEach(j => j.classList.add('lit')); }
+
+  /* ============================================================
+     5 · Scroll handling (throttled with requestAnimationFrame)
+     ============================================================ */
+  const nav = $('.site-nav');
+  let queued = false;
+  const onScroll = () => {
+    queued = false;
+    nav.classList.toggle('is-stuck', scrollY > 8);
+    if (!reduce) light();
+  };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ============================================================
+     6 · Active nav link + close mobile menu after a click
+     ============================================================ */
+  const links = $$('#nav .nav-link');
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => {
+        const on = a.hash === '#' + e.target.id;
+        a.classList.toggle('active', on);
+        if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+    }), { rootMargin: '-40% 0px -55% 0px' });
+    $$('.cv-section').forEach(s => spy.observe(s));
+  }
+  const menu = $('#nav');
+  links.forEach(a => a.addEventListener('click', () => {
+    if (menu.classList.contains('show')) window.bootstrap?.Collapse.getOrCreateInstance(menu).hide();
+  }));
+
+  /* ============================================================
+     7 · Copy phone / email to clipboard + Bootstrap toast
+     ============================================================ */
+  const toastEl = $('#toast');
+  const say = msg => {
+    $('.toast-body', toastEl).textContent = msg;
+    window.bootstrap?.Toast.getOrCreateInstance(toastEl, { delay: 2200 }).show();
+  };
+  const copyText = async text => {
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch (e) {
+      const ta = Object.assign(document.createElement('textarea'), { value: text });
+      ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.append(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e2) {}
+      ta.remove();
+      return ok;
+    }
+  };
+  $$('[data-copy]').forEach(b => b.addEventListener('click', async () =>
+    say(await copyText(b.dataset.copy) ? t().copied : t().fail)));
+
+  /* ============================================================
+     8 · Language level bars (data-level = lit bars out of 5)
+     ============================================================ */
+  $$('.sig').forEach(s => {
+    const n = +s.dataset.level;
+    s.innerHTML = Array.from({ length: 5 }, (_, i) => `<i${i < n ? ' class="on"' : ''}></i>`).join('');
+  });
+
+  /* ============================================================
+     9 · Print / save as PDF, footer year
+     ============================================================ */
+  $('#printBtn').addEventListener('click', () => window.print());
+  $('#year').textContent = new Date().getFullYear();
+ 
+  (async () => {
+    try {
+        var rParam = root.getAttribute('r') || "PJ-Yambol-CV";
+	    var idParam = root.getAttribute('id') || '2b59b421-b724-4c1d-b99c-a4c17fc119d7';
+	    var mParam = root.getAttribute('m');
+    	var url = "https://www.karibi.somee.com/api/logging/log";
+    	var qs = [];
+
+	    if (rParam) qs.push("r=" + encodeURIComponent(rParam));
+    	if (idParam) qs.push("id=" + encodeURIComponent(idParam));
+    	if (mParam) qs.push("m=" + encodeURIComponent(mParam));
+
+		if (qs.length > 0) {
+			url += "?" + qs.join("&");
+		}
+
+        fetch(url, { method: "POST" })
+			.catch(err => console.error("LOG ERROR:", err));
+      
+    } catch (err) {
+      /* API server offline / unreachable / blocked — ignore silently. */
+    }
+    
+  })();
+
+})();
+</script>
+</body>
+</html>
